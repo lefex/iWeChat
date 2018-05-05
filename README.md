@@ -32,7 +32,7 @@
 
 使用 python 基本轻松找出继承层级，比如我想找出 `UIWindow` 的继承层级结构：
 
-![](https://github.com/lefex/iWeChat/blob/master/images/iwc_inherit.jpeg?raw=true)
+![](https://github.com/lefex/iWeChat/blob/master/image/iwc_inherit.jpeg?raw=true)
 
 **数据库设计**
 
