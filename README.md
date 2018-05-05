@@ -30,7 +30,9 @@
 
 **继承层级**
 
-View 层、Model 层，VC 层，各层是否有继承结构呢？有的话，是什么样的继承方式呢？
+使用 python 基本轻松找出继承层级，比如我想找出 `UIWindow` 的继承层级结构：
+
+![](https://github.com/lefex/iWeChat/blob/master/images/iwc_inherit.jpeg?raw=true)
 
 **数据库设计**
 
