@@ -14,6 +14,16 @@
 
 分析所使用的第三方库，每个库的作用是什么。
 
+- [GPUImage](https://github.com/BradLarson/GPUImage) - (17359)
+- [WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJavascriptBridge.git) - (10649)
+- [GCDWebServer](https://github.com/swisspol/GCDWebServer.git) - (4011)
+- [KSCrash](https://github.com/kstenerud/KSCrash.git) - (1942)
+- [OpenUDID](https://github.com/ylechelle/OpenUDID.git) - (1909)
+- [YYImage](https://github.com/ibireme/YYImage.git) - (1193)
+- [SKBounceAnimation](https://github.com/khanlou/SKBounceAnimation.git) - (912)
+- [YYAsyncLayer](https://github.com/ibireme/YYAsyncLayer.git) - (405)
+- [NSTimer-Blocks](https://github.com/jivadevoe/NSTimer-Blocks.git) - (269)
+
 - **继承层级**
 
 View 层、Model 层，VC 层，各层是否有继承结构呢？有的话，是什么样的继承方式呢？
@@ -45,6 +55,10 @@ PM 常说，按照微信的加好友逻辑实现就行，擦，你有考虑到�
 - **消息结构**
 
 微信的消息类型非常多，那么每一种消息是如何设计的呢？数据结构是咋样设计的呢？
+
+- **文件说明**
+
+`iConsoleWindow` 显示的主 Window
 
 ## 加入我们
 
