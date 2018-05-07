@@ -65,7 +65,10 @@ PM 常说，按照微信的加好友逻辑实现就行，擦，你有考虑到�
 
 > **文件说明**
 
-`iConsoleWindow` 显示的主 Window
+
+- `iConsoleWindow` 显示的主 Window
+- `WAWeb` 为微信小程序类
+- `YYWAWebView : WKWebView` 为微信小程序的 WebView
 
 ## 一起维护
 
