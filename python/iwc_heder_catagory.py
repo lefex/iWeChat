@@ -6,8 +6,14 @@ import os
 IWC_ROOT = 'iwechat'
 
 def iwc_mkdir(path):
-	
-
+    compents = path.split('/')
+    index = 0
+    for dir in compents:
+        index = index + 1
+        subs = compents[0:index]
+        file_dir = '/'.join(subs)
+        if not os.path.exists(file_dir):
+            os.mkdir(file_dir)
     
 def iwc_catagory_list():
 	files = set()
@@ -18,7 +24,7 @@ def iwc_catagory_list():
     		if '.' in line:
     			try:
     				file_dir = os.path.split(line)[0]
-    				file_name = os.path.split(line)[0]
+    				file_name = os.path.split(line)[1]
     				iwc_mkdir(IWC_ROOT + '/' + file_dir)
     				open(IWC_ROOT + '/' + file_dir + '/' + file_name, 'w')
     			except Exception, e:
