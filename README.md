@@ -100,15 +100,6 @@ CREATE TABLE RevokeMsgTable (
 
 ![](https://github.com/lefex/iWeChat/blob/master/image/wc_sandbox.png?raw=true)
 
-
-> **资源结构**
-
-bundle 中的资源都有哪些；
-
-> **NSUserDefault**
-
-UserDefault 中保存了哪些数据。
-
 > **还原某些UI的设计**
 
 分析某个 View 是如何设计的并实现它，比如典型的 `ActionSheet`，可以根据头文件来还原它的实现；聊天中的气泡有很多，有非常多的 Cell，那么这种结构是如何设计的呢？
