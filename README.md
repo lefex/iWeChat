@@ -305,11 +305,11 @@ content:
 type: 1000
 content:
 
-![](SystemMessages_HongbaoIcon.png)  刘运新领取了你的<_wc_custom_link_ color="#FD9931" href="weixin://weixinhongbao/opendetail?sendid=1000039401201707207016154830099">红包</_wc_custom_link_>
+![](SystemMessages_HongbaoIcon.png)  xxx领取了你的<_wc_custom_link_ color="#FD9931" href="weixin://weixinhongbao/opendetail?sendid=1000039401201707207016154830099">红包</_wc_custom_link_>
 
-![](SystemMessages_HongbaoIcon.png)  memory领取了你的<_wc_custom_link_ color="#FD9931" href="weixin://weixinhongbao/opendetail?sendid=1000039401201707207016154830099">红包</_wc_custom_link_>
+![](SystemMessages_HongbaoIcon.png)  xxx领取了你的<_wc_custom_link_ color="#FD9931" href="weixin://weixinhongbao/opendetail?sendid=1000039401201707207016154830099">红包</_wc_custom_link_>
 
-![](SystemMessages_HongbaoIcon.png)  田向阳领取了你的<_wc_custom_link_ color="#FD9931" href="weixin://weixinhongbao/opendetail?sendid=1000039401201707207016154830099">红包</_wc_custom_link_>，你的红包已被领完 
+![](SystemMessages_HongbaoIcon.png)  xxx领取了你的<_wc_custom_link_ color="#FD9931" href="weixin://weixinhongbao/opendetail?sendid=1000039401201707207016154830099">红包</_wc_custom_link_>，你的红包已被领完 
 
 ```
 
