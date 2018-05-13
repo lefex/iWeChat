@@ -42,9 +42,64 @@
 
 数据库的结构是什么，各个表之间是如何关联的，表中保存的数据是什么。
 
+**好友表（Friend）**：每个好友，包含群主，公众号都会保存到这张表中
+
+```
+CREATE TABLE Friend (
+    userName           TEXT    PRIMARY KEY,
+    type               INTEGER DEFAULT 0,
+    certificationFlag  INTEGER DEFAULT 0,
+    imgStatus          INTEGER DEFAULT 0,
+    encodeUserName     TEXT,
+    dbContactLocal     BLOB,
+    dbContactOther     BLOB,
+    dbContactRemark    BLOB,
+    dbContactHeadImage BLOB,
+    dbContactProfile   BLOB,
+    dbContactSocial    BLOB,
+    dbContactChatRoom  BLOB,
+    dbContactBrand     BLOB
+);
+```
+
+**消息表（Chat_xxxxxxxxxxxx）**： 每一个会话会生成一张表
+
+````
+CREATE TABLE Chat_099cc67071b64517d719cdb9430037d8 (
+    TableVer   INTEGER DEFAULT 1,
+    MesLocalID INTEGER PRIMARY KEY AUTOINCREMENT,
+    MesSvrID   INTEGER DEFAULT 0,
+    CreateTime INTEGER DEFAULT 0,
+    Message    TEXT,
+    Status     INTEGER DEFAULT 0,
+    ImgStatus  INTEGER DEFAULT 0,
+    Type       INTEGER,
+    Des        INTEGER
+);
+````
+
+**消息撤回表（RevokeMsgTable）**
+
+```
+CREATE TABLE RevokeMsgTable (
+    MSG_REVOKE_COL_SVRID   INTEGER DEFAULT 0
+                                   PRIMARY KEY,
+    MSG_REVOKE_COL_CONTENT TEXT,
+    MSG_REVOKE_COL_INTRES1 INTEGER DEFAULT 0,
+    MSG_REVOKE_COL_INTRES2 INTEGER DEFAULT 0,
+    MSG_REVOKE_COL_INTRES3 INTEGER DEFAULT 0,
+    MSG_REVOKE_COL_STRRES1 TEXT,
+    MSG_REVOKE_COL_STRRES2 TEXT,
+    MSG_REVOKE_COL_STRRES3 TEXT
+);
+```
+
 > **沙盒目录**
 
 沙盒目录结构是什么，每个文件夹下面保存了那些数据。
+
+![](https://github.com/lefex/iWeChat/blob/master/image/wc_sandbox.png?raw=true)
+
 
 > **资源结构**
 
