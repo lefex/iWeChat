@@ -32,14 +32,28 @@
 
 ### 头文件
 
-利用 [class-dump](https://github.com/nygard/class-dump) 导出 APP 的头文件。
+**头文件导出**
 
 > This is a command-line utility for examining the Objective-C runtime information stored in Mach-O files. It generates declarations for the classes, categories and protocols. This is the same information provided by using ‘otool -ov’, but presented as normal Objective-C declarations, so it is much more compact and readable.
 
-下载 class-dump 后把 class-dump 导入 `/usr/local/bi` 目录下，
+
+[class-dump](https://github.com/nygard/class-dump) 这个工具用来查看某个APP的头文件。只需要找到第三方APP的 xxx.app 文件，然后执行 class-dump 命令即可。不过在执行 class-dump 命令前，需要确保 xxx.app 是砸过壳的，从 APPStore下载的 xxx.app 文件是经过加密处理的，可以直接从各大越狱市场上下载第三方 xxx.app 文件，从越狱市场下载的 xxx.app 已被破解。可以直接使用 class-dump 导出头文件。
+
+
+
+下载 class-dump 后把 class-dump 导入 `/usr/local/bi` 目录下，并执行下列命令：
 
 ```
 sudo chmod 777/usr/local/bin/class-dump
+```
+
+执行 class-dump 命令：
+
+```
+class-dump -H [xxx.app所在的位置] -o [头文件导出的位置]
+
+比如：
+class-dump -H Lefex.app -o lefexheader
 
 class-dump -H /Users/daredos/Desktop/微信-6.3.23\(越狱应用\)/Payload/WeChat.app  -o /Users/daredos/Desktop/w
 ```
@@ -51,6 +65,9 @@ class-dump -H /Users/daredos/Desktop/微信-6.3.23\(越狱应用\)/Payload/WeCha
 - 实现的协议也会被导出，比如 ViewControllerDelegate 的方法被导出到 ViewController 中，如果 ViewController 不实现 ViewControllerDelegate 协议讲不会被导出；
 - 协议中定义的方法不会被导出，只会导出到实现协议的类中；
 
+**头文件分类**
+
+有时候为了分析方便，需要把所有的头文件分成不同的文件夹存放。也就是说把他组织成我们开发 APP 时的目录结构。而微信的目录结构大致如下：
 
 把头文件按模块来划分，最后能勾勒出微信的整体项目结构放到主工程中。目前已经勾勒出微信的目录结构，不过不是很全。[参考](https://everettjf.com/2016/11/23/little-game-list-wechat-directory-tree/)
 
@@ -58,6 +75,14 @@ class-dump -H /Users/daredos/Desktop/微信-6.3.23\(越狱应用\)/Payload/WeCha
 
 
 ### 第三方库
+
+研究某个APP时，需要了解其使用的第三方库，使用 class-dump 导出的头文件非常多，刚靠肉眼查看时，耗时耗力。为了解决这个痛点，便发明了这个工具。下面是获取微信使用的第三方库，可以查看 pod 库的 star 数，源地址。
+
+本工具基于 python 写的，在[这里](https://github.com/lefex/WeChatShot/podlib/source)可以找到源码。下载源码后修改 `file_catagory.py ` 文件的 `IPA_HEADER_PATH` 为 class-dump 导出的头文件目录。执行 `python file_catagory.py `
+
+```
+IPA_HEADER_PATH = '/Users/lefex/Desktop/header/xxx'
+```
 
 - [pop](https://github.com/facebook/pop.git) - (18872)
 - [GPUImage](https://github.com/BradLarson/GPUImage.git) - (17338)
