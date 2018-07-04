@@ -6,7 +6,7 @@
 
 ## 规划
 
-### 砸壳 - ipa获取
+### 砸壳 - ipa 获取
 
 首先第一步是获取一个破解的 ipa 包，我们可以通过下面这几种方式获取：
 
@@ -31,6 +31,26 @@
 获取到 ipa 包后就需要砸壳。如果从越狱助手上下载的则不需要砸壳。
 
 ### 头文件
+
+利用 [class-dump](https://github.com/nygard/class-dump) 导出 APP 的头文件。
+
+> This is a command-line utility for examining the Objective-C runtime information stored in Mach-O files. It generates declarations for the classes, categories and protocols. This is the same information provided by using ‘otool -ov’, but presented as normal Objective-C declarations, so it is much more compact and readable.
+
+下载 class-dump 后把 class-dump 导入 `/usr/local/bi` 目录下，
+
+```
+sudo chmod 777/usr/local/bin/class-dump
+
+class-dump -H /Users/daredos/Desktop/微信-6.3.23\(越狱应用\)/Payload/WeChat.app  -o /Users/daredos/Desktop/w
+```
+
+使用 class-dump 命令导出头文件有以下特点：
+
+- 不管 .h 还是 .m 文件中的属性和方法都会被导出；
+- 某个类的类别中的方法也会被导出，导出到源文件中，比如 ViewController (Navigation) 中的方法被导出到 ViewController 中；
+- 实现的协议也会被导出，比如 ViewControllerDelegate 的方法被导出到 ViewController 中，如果 ViewController 不实现 ViewControllerDelegate 协议讲不会被导出；
+- 协议中定义的方法不会被导出，只会导出到实现协议的类中；
+
 
 把头文件按模块来划分，最后能勾勒出微信的整体项目结构放到主工程中。目前已经勾勒出微信的目录结构，不过不是很全。[参考](https://everettjf.com/2016/11/23/little-game-list-wechat-directory-tree/)
 
