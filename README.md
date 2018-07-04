@@ -100,6 +100,16 @@ IPA_HEADER_PATH = '/Users/lefex/Desktop/header/xxx'
 
 如果还有没发现的第三方库欢迎提 [issues](https://github.com/lefex/iWeChat/issues)
 
+### UI 
+
+除了头文件外，研究第三方 APP 另一个比较重要的点就是查看 UI。可以使用 Reveal 查看视图层级。使用 `MonkeyDev` 可以在非越狱的手机上运行 Reveal。
+
+MonkeyDev 默认集成是最新版本，需要把自己的 `RevealServer.framework`放到`/opt/MonkeyDev/frameworks`下（打开 Reveal，点击 reveal - help - show reveal in finder 即可找到 RevealServer.framework），这样就可以查看时图层级。
+
+如果 Reveal 过期了，直接修改电脑时间为可以继续使用。
+
+![reveal.png](https://upload-images.jianshu.io/upload_images/1664496-77c7d397deb1bea3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 ### 继承层级
 
 使用 python 脚本轻松找出继承层级，比如我想找出 `UIWindow` 的继承层级结构，在这里可以找到 [python脚本](https://github.com/lefex/iWeChat/tree/master/python)：
