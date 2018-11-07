@@ -78,7 +78,7 @@ class-dump -H /Users/daredos/Desktop/微信-6.3.23\(越狱应用\)/Payload/WeCha
 
 研究某个APP时，需要了解其使用的第三方库，使用 class-dump 导出的头文件非常多，刚靠肉眼查看时，耗时耗力。为了解决这个痛点，便发明了这个工具。下面是获取微信使用的第三方库，可以查看 pod 库的 star 数，源地址。
 
-本工具基于 python 写的，在[这里](https://github.com/lefex/WeChatShot/podlib/source)可以找到源码。下载源码后修改 `file_catagory.py ` 文件的 `IPA_HEADER_PATH` 为 class-dump 导出的头文件目录。执行 `python file_catagory.py `
+本工具基于 python 写的，在[这里](https://github.com/lefex/iWeChat/blob/master/python)可以找到源码。下载源码后修改 `file_catagory.py ` 文件的 `IPA_HEADER_PATH` 为 class-dump 导出的头文件目录。执行 `python file_catagory.py `
 
 ```
 IPA_HEADER_PATH = '/Users/lefex/Desktop/header/xxx'
