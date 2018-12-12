@@ -209,6 +209,173 @@ target 'xxxDylib' do
 end
 ```
 
+### Hook 代码 CaptainHook
+
+```objective-c
+// 无参数
+CHDeclareClass(WCActionSheet)
+CHOptimizedMethod0(self, NSArray *, WCActionSheet, buttonTitleList){
+    NSArray *titles = CHSuper0(WCActionSheet, buttonTitleList);
+    return titles;
+}
+
+CHConstructor{
+    CHLoadLateClass(WCActionSheet);
+    CHClassHook0(WCActionSheet, buttonTitleList);
+}
+```
+
+```objective-c
+// 一个参数
+CHDeclareClass(MMUIImageView);
+CHOptimizedMethod1(self, void, MMUIImageView, setImage, NSString *, imageurl){
+    NSLog(@"setImage: %@", imageurl);
+    CHSuper1(MMUIImageView, setImage, imageurl);
+}
+CHConstructor{    
+    CHLoadLateClass(MMUIImageView);
+    CHClassHook1(MMUIImageView, setImage);
+}
+```
+
+```objective-c
+@interface Lefex : NSObject
+
++ (Lefex *)empty;
+- (void)updateNickName:(NSString *)nickName;
+- (void)updateNickName:(NSString *)nickName age:(int)age;
+- (void)requestNickNameForId:(NSString *)userId completion:(void(^)(NSString *))block;
+
+@end
+```
+
+```objective-c
+@implementation Lefex
+
++ (Lefex *)empty {
+    NSLog(@"orgin - %@", NSStringFromSelector(_cmd));
+    return [Lefex new];
+}
+
+- (void)updateNickName:(NSString *)nickName {
+    NSLog(@"orgin - %@", NSStringFromSelector(_cmd));
+}
+
+- (void)updateNickName:(NSString *)nickName age:(int)age {
+    NSLog(@"orgin - %@", NSStringFromSelector(_cmd));
+}
+
+- (void)requestNickNameForId:(NSString *)userId completion:(void(^)(NSString *))block {
+    NSLog(@"orgin - %@", NSStringFromSelector(_cmd));
+    if (block) {
+        block(@"lefe_x");
+    }
+}
+
+@end
+```
+
+
+
+```objective-c
+typedef void(^RequestBlock)(NSString *);
+
+// hook某个类时需要先声明
+CHDeclareClass(Lefex)
+
+// Hook 类方法
+CHOptimizedClassMethod0(self, Lefex *, Lefex, empty){
+    Lefex *me = CHSuper0(Lefex, empty);
+    NSLog(@"Hook empty");
+    return me;
+}
+
+// Hook 一个参数的方法
+CHOptimizedMethod1(self, void, Lefex, updateNickName, NSString *, name) {
+    CHSuper1(Lefex, updateNickName, name);
+    NSLog(@"hook updateNickName");
+}
+
+// Hook 两个参数的方法
+CHOptimizedMethod2(self, void, Lefex, updateNickName, NSString *, name, age, int, age) {
+    CHSuper2(Lefex, updateNickName, name, age, age);
+    NSLog(@"hook updateNickName: age");
+}
+
+// Hook 带有block的方法
+CHOptimizedMethod2(self, void, Lefex, requestNickNameForId, NSString *, userId, completion, RequestBlock, block) {
+    RequestBlock nicknameBlock = ^(NSString *nickname) {
+        NSLog(@"hook callback :%@", nickname);
+        if (block) {
+            block(nickname);
+        }
+    };
+    
+    CHSuper2(Lefex, requestNickNameForId, userId, completion, nicknameBlock);
+    NSLog(@"hook requestNickNameForId: age");
+}
+
+CHConstructor {
+    // 导入类才能够使用
+    // linkable
+    CHLoadClass(Lefex);
+    // un linkable
+//    CHLoadLateClass(Lefex);
+    
+    CHClassHook0(Lefex, empty);
+    CHClassHook1(Lefex, updateNickName);
+    CHClassHook2(Lefex, updateNickName, age);
+    CHClassHook2(Lefex, requestNickNameForId, completion);
+}
+```
+
+
+
+### 查找可执行文件技巧
+
+显示包内容后，按 size 大小排列文件，可直接文件一搬很多；
+
+### 查看网络请求数据
+
+有时候想快速地查看某个 APP 中的网络请求结果，抓包可能是一个不错的选择，但是遇到HTTPS的请求，就比较费事。其实我们可以通过逆向来查看网络请求，主要有两种方式：
+
+- 找打某个应用中网络请求的统一出口，然后 Hook 掉这个方法，直接拿到数据。不过找到 APP 网络请求封装的类有时候比较难。教你一招，非常容易，找到某个页面中含有网络请求的类，使用 Hopper 工具查看伪代码，非常容易定位具体的网络请求类；
+- 使用网络工具直接集成到第三方APP中，通过工具查看网络请求；
+
+### Logos 语法
+
+http://iphonedevwiki.net/index.php/Logos
+
+```objective-c
+// 要 hook 的类
+%hook ClassName
+
+// hook 类方法
++ (id)sharedInstance
+{
+	%log;
+	return %orig; // 调用原实现
+}
+
+- (void)messageWithNoReturnAndOneArgument:(id)originalArgument
+{
+	%log;
+    // 调用原实现，可以修改参数
+	%orig(originalArgument);
+}
+
+- (id)messageWithReturnAndNoArguments
+{
+	%log;
+
+    // 调用原实现，查看返回值，修改返回值
+	id originalReturnOfMessage = %orig;
+	return originalReturnOfMessage;
+}
+// 要有结束标签
+%end
+```
+
 
 
 ### 文件说明
