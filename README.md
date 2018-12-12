@@ -315,6 +315,12 @@ CHOptimizedMethod2(self, void, Lefex, requestNickNameForId, NSString *, userId, 
     NSLog(@"hook requestNickNameForId: age");
 }
 
+// Hook 参数是二级指针的方法
+CHOptimizedMethod1(self, void, Lefex, queryLocation, NSString **, name) {
+    CHSuper1(Lefex, queryLocation, name);
+    NSLog(@"hook queryLocation: %@", *name);
+}
+
 CHConstructor {
     // 导入类才能够使用
     // linkable
@@ -326,7 +332,24 @@ CHConstructor {
     CHClassHook1(Lefex, updateNickName);
     CHClassHook2(Lefex, updateNickName, age);
     CHClassHook2(Lefex, requestNickNameForId, completion);
+    CHClassHook1(Lefex, queryLocation);
 }
+```
+
+```verilog
+2018-12-12 21:03:13.378534+0800 CaptainDemo[43777:862109] orgin - empty
+2018-12-12 21:03:13.378682+0800 CaptainDemo[43777:862109] Hook empty
+2018-12-12 21:03:13.378822+0800 CaptainDemo[43777:862109] orgin - updateNickName:
+2018-12-12 21:03:13.378919+0800 CaptainDemo[43777:862109] hook updateNickName
+2018-12-12 21:03:13.379002+0800 CaptainDemo[43777:862109] orgin - updateNickName:age:
+2018-12-12 21:03:13.379097+0800 CaptainDemo[43777:862109] hook updateNickName: age
+2018-12-12 21:03:13.379220+0800 CaptainDemo[43777:862109] orgin - requestNickNameForId:completion:
+2018-12-12 21:03:13.379299+0800 CaptainDemo[43777:862109] hook callback :lefe_x
+2018-12-12 21:03:13.379374+0800 CaptainDemo[43777:862109] orgin callback lefe_x
+2018-12-12 21:03:13.379440+0800 CaptainDemo[43777:862109] hook requestNickNameForId: age
+2018-12-12 21:03:13.379513+0800 CaptainDemo[43777:862109] orgin - queryLocation:
+2018-12-12 21:03:13.379582+0800 CaptainDemo[43777:862109] hook queryLocation: BeiJing
+2018-12-12 21:03:13.379670+0800 CaptainDemo[43777:862109] orgin loction: BeiJing
 ```
 
 
