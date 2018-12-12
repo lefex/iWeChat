@@ -100,6 +100,12 @@ IPA_HEADER_PATH = '/Users/lefex/Desktop/header/xxx'
 
 如果还有没发现的第三方库欢迎提 [issues](https://github.com/lefex/iWeChat/issues)
 
+
+
+如果APP使用了三方库，可以输入`PodsDummy`来快速找到使用的第三方库和私有库；
+
+<img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/PodsDummy.png" title="三方库" width="300"/>
+
 ### UI 
 
 除了头文件外，研究第三方 APP 另一个比较重要的点就是查看 UI。可以使用 Reveal 查看视图层级。使用 `MonkeyDev` 可以在非越狱的手机上运行 Reveal。
@@ -186,6 +192,24 @@ CREATE TABLE RevokeMsgTable (
 ### 探索各个模块业务逻辑
 
 PM 常说，按照微信的加好友逻辑实现就行，擦，你有考虑到微信加好友背后还有哪些你所不知道的逻辑吗？
+
+### Pod 集成
+
+如果想使用第三方库咋么办？直接通过 `pod init`，然后在 `Podfile` 里添加你想使用的第三方库即可。
+
+```
+target 'xxxDylib' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for KuaiXuoyeDylib
+  pod 'xxx'
+
+
+end
+```
+
+
 
 ### 文件说明
 
