@@ -415,3 +415,11 @@ http://iphonedevwiki.net/index.php/Logos
 ## 好文推荐
 
 已经有不少同学对微信有一些探索，把我们认为比较好的文章推荐到这里：
+
+
+
+### 联系信息
+
+如果想入群，可以先加我的微信好友，备注 iWechat ！！！
+
+<img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/qrcode.png" title="继承" width="300"/>
