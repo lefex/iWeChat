@@ -31,6 +31,8 @@
   - [💯文件说明](https://github.com/lefex/iWeChat#%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E)
 
 - [🦁错误总结](https://github.com/lefex/iWeChat#%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93)
+  - [新建文件后报错]()
+  - [修改电脑时间运行报错]()
 
 - [🙈相关推荐](https://github.com/lefex/iWeChat#%E5%A5%BD%E6%96%87%E6%8E%A8%E8%8D%90)
 
@@ -638,10 +640,14 @@ PM 常说，按照微信的加好友逻辑实现就行，擦，你有考虑到�
 
 ## 🦁错误总结
 
+- **新建文件后报错**
+
 ```verilog
 entry point (_main) undefined. for architecture arm64
 // 新建文件时，需要把文件建到 xxxDylib 中，不能选择 Target
 ```
+
+- **修改电脑时间运行报错**
 
 ```objective-c
 CodeSign /Users/wangsuyan/Library/Developer/Xcode/DerivedData/TVideo-hamzrgdkjpjxzwaloktqyzqrckpm/Build/Products/Debug-iphoneos/libTVideoDylib.dylib
