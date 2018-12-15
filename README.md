@@ -19,6 +19,10 @@
   - [💯CaptainHook Hook 代码]()
   - [💯Logos 语法](https://github.com/lefex/iWeChat#logos-%E8%AF%AD%E6%B3%95)
   - [💯查找可执行文件技巧](https://github.com/lefex/iWeChat#%E6%9F%A5%E6%89%BE%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%8A%80%E5%B7%A7)
+  - [💯class-dump 使用](https://github.com/lefex/iWeChat#class-dump-%E4%BD%BF%E7%94%A8)
+  - [💯Cycript调试程序](https://github.com/lefex/iWeChat#cycript%E8%B0%83%E8%AF%95%E7%A8%8B%E5%BA%8F)
+  - [💯MachOView](https://github.com/lefex/iWeChat#machoview)
+  - [💯在 Cycript 和 LLDB 中使用私有的方法调试 iOS](https://github.com/lefex/iWeChat#%E5%9C%A8-cycript-%E5%92%8C-lldb-%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%A7%81%E6%9C%89%E7%9A%84%E6%96%B9%E6%B3%95%E8%B0%83%E8%AF%95-ios)
 
 - [🐼业务逻辑](https://github.com/lefex/iWeChat#%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91)
   - [💯还原某些UI的设计](https://github.com/lefex/iWeChat#%E8%BF%98%E5%8E%9F%E6%9F%90%E4%BA%9Bui%E7%9A%84%E8%AE%BE%E8%AE%A1)
