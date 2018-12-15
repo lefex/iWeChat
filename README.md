@@ -23,6 +23,7 @@
   - [💯Cycript调试程序](https://github.com/lefex/iWeChat#cycript%E8%B0%83%E8%AF%95%E7%A8%8B%E5%BA%8F)
   - [💯MachOView](https://github.com/lefex/iWeChat#machoview)
   - [💯在 Cycript 和 LLDB 中使用私有的方法调试 iOS](https://github.com/lefex/iWeChat#%E5%9C%A8-cycript-%E5%92%8C-lldb-%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%A7%81%E6%9C%89%E7%9A%84%E6%96%B9%E6%B3%95%E8%B0%83%E8%AF%95-ios)
+  - [💯使用 NSInvocation 调用方法]()
 
 - [🐼业务逻辑](https://github.com/lefex/iWeChat#%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91)
   - [💯还原某些UI的设计](https://github.com/lefex/iWeChat#%E8%BF%98%E5%8E%9F%E6%9F%90%E4%BA%9Bui%E7%9A%84%E8%AE%BE%E8%AE%A1)
@@ -349,7 +350,7 @@ CHOptimizedMethod2(self, void, Lefex, updateNickName, NSString *, name, age, int
     NSLog(@"hook updateNickName: age");
 }
 
-// Hook 带有block的方法
+// Hook 带有block的方法，需要知道 block 中的参数个数
 CHOptimizedMethod2(self, void, Lefex, requestNickNameForId, NSString *, userId, completion, RequestBlock, block) {
     RequestBlock nicknameBlock = ^(NSString *nickname) {
         NSLog(@"hook callback :%@", nickname);
@@ -615,6 +616,24 @@ in NSObject:
 
 [参考](http://iosre.com/t/powerful-private-methods-for-debugging-in-cycript-lldb/3414)
 
+#### 💯使用 NSInvocation 调用方法
+
+在逆向中想要调用原APP中已有类的方法时，需要通过 NSInvocation 的方式调用，不能直接调用。
+
+```objective-c
+// 调用某个类方法
+NSString *title = [NSClassFromString(@"TTool") invoke:@"getFormatString:" arguments:@[item.title ?: @""]];
+
+// 调用类方法，并模拟进入某个页面
+UIViewController *detailVC = [@"LEFEBookDetailsViewController" invokeClassMethod:@"alloc"];
+[detailVC invoke:@"initWithBookId:type:" args:dataItem.bookId, @(dataItem.bookType), nil];
+[detailVC invoke:@"view"];
+[detailVC invoke:@"viewWillAppear:" args:@(0), nil];
+[detailVC invoke:@"viewDidAppear:" args:@(0), nil];
+```
+
+[RuntimeInvoker](https://github.com/cyanzhong/RuntimeInvoker)
+
 ## 🐼业务逻辑
 
 #### 💯还原某些UI的设计
@@ -671,9 +690,15 @@ Command /usr/bin/codesign failed with exit code 1
 已经有不少同学对微信有一些探索，把我们认为比较好的文章推荐到这里：
 
 - [**WeChatRedEnvelop 抢红包**  ](https://github.com/buginux/WeChatRedEnvelop)
+
 - [**WeChatPlugin-MacOS Mac微信插件**  ](https://github.com/TKkk-iOSer/WeChatPlugin-MacOS)
+
 - [**MonkeyDev**](https://github.com/AloneMonkey/MonkeyDev/wiki/%E9%9D%9E%E8%B6%8A%E7%8B%B1App%E9%9B%86%E6%88%90)
+
 - [**给微信添加聊天记录截图功能**](https://mp.weixin.qq.com/s/TpwZtPu0DKOwm2d6B9fTmg)
+
+- [**深入iOS系统底层之汇编语言**](https://www.jianshu.com/p/365ed6c385e5)
+
 
 ## 🐯联系信息
 
