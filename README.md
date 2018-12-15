@@ -431,7 +431,183 @@ http://iphonedevwiki.net/index.php/Logos
 
 显示包内容后，按 size 大小排列文件，可执行文件一般比较大，名字和app包名字一致（有时候不一致）；
 
+#### 💯class-dump 使用
 
+有时候在开发的过程中需要些黑科技，“偷窥”第三方APP使用了哪些第三方库，或猜猜它是如何实现的，咋么办？
+
+其实我们可以使用 class-dump 这个工具查看某个APP的头文件。只需要找到第三方APP的 xxx.app 文件，然后执行 class-dump 命令即可。不过在执行 class-dump 命令前，需要确保 xxx.app 是砸过壳的，从 APPStore下载的 xxx.app 文件是经过加密处理的，可以直接从各大越狱市场上下载第三方 xxx.app 文件，从越狱市场下载的 xxx.app 已被破解。可以直接使用 class-dump 导出头文件。
+
+创建一个Demo，然后打包导出 ipa 包，找到 xxx.app，这里 xxx.app 是未经过加密的。具体代码如下：
+
+```
+@protocol ViewControllerDelegate<NSObject>
+- (void)didRefreshDataSuccess;
+@end
+
+@interface ViewController : UIViewController
+
+@property (nonatomic, weak) id<ViewControllerDelegate> delegate;
+@property (nonatomic, copy) NSString *pubName;
+
+- (void)pubLoadDataWithAlbumID:(NSString *)albumID count:(NSInteger *)count;
+
+@end
+
+@interface ViewController (Navigation)
+
+- (void)setRightBarItemWithTitle:(NSString *)title;
+
+@end
+```
+
+执行 class-dump 命令：
+
+```
+class-dump -H [xxx.app所在的位置] -o [头文件导出的位置]
+
+比如：
+class-dump -H Lefex.app -o lefexheader
+```
+
+最终导出的头文件如下：
+
+```
+@class NSString;
+@protocol ViewControllerDelegate;
+
+@interface ViewController : UIViewController
+{
+    id <ViewControllerDelegate> _delegate;
+    NSString *_pubName;
+    NSString *_priName;
+}
+
+@property(copy, nonatomic) NSString *priName; // @synthesize priName=_priName;
+@property(copy, nonatomic) NSString *pubName; // @synthesize pubName=_pubName;
+@property(nonatomic) __weak id <ViewControllerDelegate> delegate; // @synthesize delegate=_delegate;
+- (void).cxx_destruct;
+- (void)didRefreshDataSuccess;
+- (void)priLoadDataWithAlbumID:(id)arg1 count:(long long *)arg2;
+- (void)pubLoadDataWithAlbumID:(id)arg1 count:(long long *)arg2;
+- (void)viewDidLoad;
+- (void)setRightBarItemWithTitle:(id)arg1;
+
+@end
+```
+
+总结：
+
+使用 class-dump 命令导出头文件有以下特点：
+
+- 不管 .h 还是 .m 文件中的属性和方法都会被导出；
+- 某个类的类别中的方法也会被导出，导出到源文件中，比如 ViewController (Navigation) 中的方法被导出到 ViewController 中；
+- 实现的协议也会被导出，比如 ViewControllerDelegate 的方法被导出到 ViewController 中，如果 ViewController 不实现 ViewControllerDelegate 协议讲不会被导出；
+- 协议中定义的方法不会被导出，只会导出到实现协议的类中；
+
+参考：http://stevenygard.com/projects/class-dump/
+
+#### 💯Cycript调试程序
+
+试想一种场景，我想知道某个第三方 APP 当前页面对应的是哪个 VC，想让某个实例执行某个函数后的效果，打印当前的视图层级，咋么办？
+
+其实使用 Cycript 即可解决这几个问题，Cycript是一门脚本语言，可以把某段代码注入到某个进程中。比如我可以把用 Cycript 编写的代码植入到一个运行的 APP 中，这样 APP 就可以执行注入的代码。下面的测试需要安装 MonkeyDev。 
+
+安装 Cycript 非常简单，直接下载 Cycript，并进入 Cycript 目录下，执行：
+
+`./cycript -r 192.168.10.111:6666`
+
+192.168.10.111:6666 是手机ip地址，6666是默认的端口。连接成功后，控制台会有：cy#。需要注意手机和电脑需要使用同一Wifi。
+
+1.当前页面对应的是哪个 VC?
+
+获取当前页面是哪个页面时，可以用到响应链的知识。假如SubjectViewController有一个 UITableView， 它的内存地址是 0x106a05c00 ，那么我可以通过下列命令找到当前的VC。
+
+```
+cy# [#0x106a05c00 nextResponder]
+#"<UIView: 0x105d839d0; frame = (0 0; 375 667); autoresize = W+H; layer = <CALayer: 0x1c0635460>>"
+cy# [#0x105d839d0 nextResponder]
+#"<SubjectViewController: 0x106a0a200>"
+```
+
+2.某个实例执行某个函数后的效果？
+
+`SubjectViewController` 的内存地址是 `0x106a0a200`，直接执行下面的这条指令，`SubjectViewController` 的标题会立刻变为 `Lefe_x`。
+
+`cy# [#0x106a0a200 setTitle: @"Lefe_x"]`
+
+3.打印当前的视图层级
+
+直接执行下列指令即可。
+
+`[[UIApp keyWindow]recursiveDescription].toString()`
+
+[参考](http://www.cycript.org/)
+
+#### 💯MachOView
+
+Mach-O格式全称为Mach Object文件格式的缩写，是mac上可执行文件的格式，类似于windows上的PE格式 (Portable Executable ), linux上的elf格式 (Executable and Linking Format)。
+
+MachOView工具可Mac平台中可查看MachO文件格式信息，IOS系统中可执行程序属于Mach-O文件格式
+
+[MachOView下载地址](https://sourceforge.net/projects/machoview/)
+
+[github](https://github.com/gdbinit/MachOView)
+
+
+
+#### 💯在 Cycript 和 LLDB 中使用私有的方法调试 iOS
+
+下面这些方法对于使用 `Cycript` 和 `LLDB` 调试第三方应用非常方便，比如想打印当前的视图层级结构，打印某个类的属性，方法，找到当前显示的 `ViewController` 等。当然，在非逆向的环境中，可以使用 `performSelector:` 执行，可以查看到同样的效果，下面的例子通过 `performSelector:` 方法获取。
+
+- `recursiveDescription`：打印某个视图的层级关系；
+
+```
+<UIWindow: 0x7fdc86411aa0; frame = (0 0; 375 812); gestureRecognizers = <NSArray: 0x600000248a60>; layer = <UIWindowLayer: 0x600000239e80>>
+```
+
+- `_printHierarchy`：直接获取当前显示的 `ViewController`，不必使用 `[view nextResponder]` 获取当前显示的 viewController；
+
+```
+<ViewController 0x7fdc86411270>, state: appeared, view: <UIView 0x7fdc867085e0>
+```
+
+- `_autolayoutTrace`：是 recursiveDescription 的精简版，忽略了关于 View 的描述信息；
+
+```
+UIWindow:0x7fdc86411aa0
+|   UIView:0x7fdc867085e0
+```
+
+- `_ivarDescription`：打印某个实例的所有变量名和值；
+
+```
+<Lefex: 0x604000005a80>:
+in Lefex:
+	_name (NSString*): @"wsy"
+in NSObject:
+	isa (Class): Lefex (isa, 0x10cde9038)
+```
+
+- `_methodDescription`：打印某个类的所有属性，实例方法，类方法。
+
+```
+<Lefex: 0x604000005a80>:
+in Lefex:
+	Class Methods:
+		+ (id) trueName; (0x10cde6590)
+	Properties:
+		@property (copy, nonatomic) NSString* name;  (@synthesize name = _name;)
+	Instance Methods:
+		- (void) changeName; (0x10cde6580)
+		- (void) .cxx_destruct; (0x10cde6620)
+		- (id) name; (0x10cde65b0)
+		- (void) setName:(id)arg1; (0x10cde65e0)
+in NSObject:
+	Class Methods:
+	省略......
+```
+
+[参考](http://iosre.com/t/powerful-private-methods-for-debugging-in-cycript-lldb/3414)
 
 ## 🐼业务逻辑
 
@@ -486,8 +662,8 @@ Command /usr/bin/codesign failed with exit code 1
 
 - [**WeChatRedEnvelop 抢红包**  ](https://github.com/buginux/WeChatRedEnvelop)
 - [**WeChatPlugin-MacOS Mac微信插件**  ](https://github.com/TKkk-iOSer/WeChatPlugin-MacOS)
-
-
+- [**MonkeyDev**](https://github.com/AloneMonkey/MonkeyDev/wiki/%E9%9D%9E%E8%B6%8A%E7%8B%B1App%E9%9B%86%E6%88%90)
+- [**给微信添加聊天记录截图功能**](https://mp.weixin.qq.com/s/TpwZtPu0DKOwm2d6B9fTmg)
 
 ## 🐯联系信息
 
