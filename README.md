@@ -1,12 +1,12 @@
 ![](https://github.com/lefex/iWeChat/blob/master/image/bannel.png?raw=true)
 
-## 初衷
+## 🐶初衷
 
 **我们一起还原微信，探索微信的奥妙之处**。微信作为 IM 领域的佼佼者，更是 APP 中的翘楚。它里面有很多值得开发者借鉴的地方，小到某个 View 的设计，大到整个APP的架构，一系列隐藏在背后的技术手段或交互设计需要我们挖掘。所以，希望通过 iWeChat 这个项目能够勾勒出微信的设计，使用到的技术手段等。最重要的是，从这个项目中，你可以学到如何分析一个第三方 APP。
 
-## 规划
+## 🐱APP信息
 
-### 砸壳 - ipa 获取
+#### 💯砸壳 - ipa 获取
 
 首先第一步是获取一个破解的 ipa 包，我们可以通过下面这几种方式获取：
 
@@ -30,7 +30,7 @@
 
 获取到 ipa 包后就需要砸壳。如果从越狱助手上下载的则不需要砸壳。
 
-### 头文件
+#### 💯头文件
 
 **头文件导出**
 
@@ -73,8 +73,13 @@ class-dump -H /Users/daredos/Desktop/微信-6.3.23\(越狱应用\)/Payload/WeCha
 
 <img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/wechat_catagory.png" title="继承" width="300"/>
 
+**MonkeyDev自动导出头文件**
 
-### 第三方库
+工程已集成class-dump导出可执行文件OC头文件的功能，可在build settings最下面开启该功能，在 User-Defined 下添加 MONKEYDEV_CLASS_DUMP 值为 YES。
+
+#### 💯第三方库
+
+**基于脚本**
 
 研究某个APP时，需要了解其使用的第三方库，使用 class-dump 导出的头文件非常多，刚靠肉眼查看时，耗时耗力。为了解决这个痛点，便发明了这个工具。下面是获取微信使用的第三方库，可以查看 pod 库的 star 数，源地址。
 
@@ -100,13 +105,13 @@ IPA_HEADER_PATH = '/Users/lefex/Desktop/header/xxx'
 
 如果还有没发现的第三方库欢迎提 [issues](https://github.com/lefex/iWeChat/issues)
 
-
+**通过头文件搜索**
 
 如果APP使用了三方库，可以输入`PodsDummy`来快速找到使用的第三方库和私有库；
 
 <img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/PodsDummy.png" title="三方库" width="300"/>
 
-### UI 
+#### 💯UI 
 
 除了头文件外，研究第三方 APP 另一个比较重要的点就是查看 UI。可以使用 Reveal 查看视图层级。使用 `MonkeyDev` 可以在非越狱的手机上运行 Reveal。
 
@@ -116,14 +121,15 @@ MonkeyDev 默认集成是最新版本，需要把自己的 `RevealServer.framewo
 
 ![reveal.png](https://upload-images.jianshu.io/upload_images/1664496-77c7d397deb1bea3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### 继承层级
+
+
+#### 💯继承层级
 
 使用 python 脚本轻松找出继承层级，比如我想找出 `UIWindow` 的继承层级结构，在这里可以找到 [python脚本](https://github.com/lefex/iWeChat/tree/master/python)：
 
 <img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/iwc_inherit.jpeg" title="继承" width="300"/>
 
-
-### 数据库设计
+#### 💯数据库设计
 
 数据库的结构是什么，各个表之间是如何关联的，表中保存的数据是什么。
 
@@ -179,21 +185,15 @@ CREATE TABLE RevokeMsgTable (
 );
 ```
 
-### 沙盒目录
+#### 💯沙盒目录
 
 沙盒目录结构是什么，每个文件夹下面保存了那些数据。
 
 ![](https://github.com/lefex/iWeChat/blob/master/image/wc_sandbox.png?raw=true)
 
-### 还原某些UI的设计
 
-分析某个 View 是如何设计的并实现它，比如典型的 `ActionSheet`，可以根据头文件来还原它的实现；聊天中的气泡有很多，有非常多的 Cell，那么这种结构是如何设计的呢？
 
-### 探索各个模块业务逻辑
-
-PM 常说，按照微信的加好友逻辑实现就行，擦，你有考虑到微信加好友背后还有哪些你所不知道的逻辑吗？
-
-### Pod 集成
+#### 💯Pod 集成
 
 如果想使用第三方库咋么办？直接通过 `pod init`，然后在 `Podfile` 里添加你想使用的第三方库即可。
 
@@ -209,7 +209,16 @@ target 'xxxDylib' do
 end
 ```
 
-### Hook 代码 CaptainHook
+#### 💯查看网络请求数据
+
+有时候想快速地查看某个 APP 中的网络请求结果，抓包可能是一个不错的选择，但是遇到HTTPS的请求，就比较费事。其实我们可以通过逆向来查看网络请求，主要有两种方式：
+
+- 找打某个应用中网络请求的统一出口，然后 Hook 掉这个方法，直接拿到数据。不过找到 APP 网络请求封装的类有时候比较难。教你一招，非常容易，找到某个页面中含有网络请求的类，使用 Hopper 工具查看伪代码，非常容易定位具体的网络请求类；
+- 使用网络工具直接集成到第三方APP中，通过工具查看网络请求；
+
+## 🐰工具使用说明
+
+💯**CaptainHook Hook 代码**
 
 ```objective-c
 // 无参数
@@ -352,20 +361,7 @@ CHConstructor {
 2018-12-12 21:03:13.379670+0800 CaptainDemo[43777:862109] orgin loction: BeiJing
 ```
 
-
-
-### 查找可执行文件技巧
-
-显示包内容后，按 size 大小排列文件，可直接文件一搬很多；
-
-### 查看网络请求数据
-
-有时候想快速地查看某个 APP 中的网络请求结果，抓包可能是一个不错的选择，但是遇到HTTPS的请求，就比较费事。其实我们可以通过逆向来查看网络请求，主要有两种方式：
-
-- 找打某个应用中网络请求的统一出口，然后 Hook 掉这个方法，直接拿到数据。不过找到 APP 网络请求封装的类有时候比较难。教你一招，非常容易，找到某个页面中含有网络请求的类，使用 Hopper 工具查看伪代码，非常容易定位具体的网络请求类；
-- 使用网络工具直接集成到第三方APP中，通过工具查看网络请求；
-
-### Logos 语法
+#### 💯Logos 语法
 
 http://iphonedevwiki.net/index.php/Logos
 
@@ -399,24 +395,36 @@ http://iphonedevwiki.net/index.php/Logos
 %end
 ```
 
+#### 💯查找可执行文件技巧
+
+显示包内容后，按 size 大小排列文件，可直接文件一搬很多；
 
 
-### 文件说明
+
+## 🐼业务逻辑
+
+#### 💯还原某些UI的设计
+
+分析某个 View 是如何设计的并实现它，比如典型的 `ActionSheet`，可以根据头文件来还原它的实现；聊天中的气泡有很多，有非常多的 Cell，那么这种结构是如何设计的呢？
+
+#### 💯探索各个模块业务逻辑
+
+PM 常说，按照微信的加好友逻辑实现就行，擦，你有考虑到微信加好友背后还有哪些你所不知道的逻辑吗？
+
+#### 💯消息类型
+
+[微信消息类型](https://github.com/lefex/iWeChat/blob/master/MESSAGE.md)
+
+#### 💯文件说明
 
 
 - `iConsoleWindow` 显示的主 Window
 - `WAWeb` 为微信小程序类
 - `YYWAWebView : WKWebView` 为微信小程序的 WebView
 
-### 消息类型
 
-[微信消息类型](https://github.com/lefex/iWeChat/blob/master/MESSAGE.md)
 
-## 好文推荐
-
-已经有不少同学对微信有一些探索，把我们认为比较好的文章推荐到这里：
-
-### 错误总结
+## 🦁错误总结
 
 ```verilog
 entry point (_main) undefined. for architecture arm64
@@ -440,8 +448,14 @@ Command /usr/bin/codesign failed with exit code 1
 
 
 
-### 联系信息
+## 🙈好文推荐
 
-如果想入群，可以先加我的微信好友，备注 iWechat ！！！
+已经有不少同学对微信有一些探索，把我们认为比较好的文章推荐到这里：
+
+
+
+## 🐯联系信息
+
+#### 如果想入群，可以先加我的微信好友，备注 iWechat ！！！
 
 <img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/qrcode.png" title="继承" width="300"/>
