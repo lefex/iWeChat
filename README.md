@@ -416,6 +416,28 @@ http://iphonedevwiki.net/index.php/Logos
 
 已经有不少同学对微信有一些探索，把我们认为比较好的文章推荐到这里：
 
+### 错误总结
+
+```verilog
+entry point (_main) undefined. for architecture arm64
+// 新建文件时，需要把文件建到 xxxDylib 中，不能选择 Target
+```
+
+```objective-c
+CodeSign /Users/wangsuyan/Library/Developer/Xcode/DerivedData/TVideo-hamzrgdkjpjxzwaloktqyzqrckpm/Build/Products/Debug-iphoneos/libTVideoDylib.dylib
+    cd /Users/wangsuyan/Desktop/baidu/reverse/TVideo
+    export CODESIGN_ALLOCATE=/Users/wangsuyan/Desktop/Xcode9.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/codesign_allocate
+    export PATH="/Users/wangsuyan/Desktop/Xcode9.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Users/wangsuyan/Desktop/Xcode9.app/Contents/Developer/usr/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    
+Signing Identity:     "iPhone Developer: xx (xxx)"
+
+    /usr/bin/codesign --force --sign CE05AADAA82C40AD173C44316B410B221A24C9AB --entitlements /Users/wangsuyan/Library/Developer/Xcode/DerivedData/TVideo-hamzrgdkjpjxzwaloktqyzqrckpm/Build/Intermediates.noindex/TVideo.build/Debug-iphoneos/TVideoDylib.build/libTVideoDylib.dylib.xcent --timestamp=none /Users/wangsuyan/Library/Developer/Xcode/DerivedData/TVideo-hamzrgdkjpjxzwaloktqyzqrckpm/Build/Products/Debug-iphoneos/libTVideoDylib.dylib
+
+CE05AADAA82C40AD173C44316B410B221A24C9AB: no identity found
+Command /usr/bin/codesign failed with exit code 1
+// 这个错误是修改了电脑时间
+```
+
 
 
 ### 联系信息
