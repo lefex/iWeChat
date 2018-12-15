@@ -1,5 +1,37 @@
 ![](https://github.com/lefex/iWeChat/blob/master/image/bannel.png?raw=true)
 
+
+
+- [🐶初衷](https://github.com/lefex/iWeChat#%E5%88%9D%E8%A1%B7)
+
+- [🐱APP信息](https://github.com/lefex/iWeChat#app%E4%BF%A1%E6%81%AF)
+  - [💯砸壳 - ipa 获取](https://github.com/lefex/iWeChat#app%E4%BF%A1%E6%81%AF)
+  - [💯头文件](https://github.com/lefex/iWeChat#%E5%A4%B4%E6%96%87%E4%BB%B6)
+  - [💯第三方库](https://github.com/lefex/iWeChat#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93)
+  - [💯UI](https://github.com/lefex/iWeChat#ui)
+  - [💯继承层级](https://github.com/lefex/iWeChat#%E7%BB%A7%E6%89%BF%E5%B1%82%E7%BA%A7)
+  - [💯数据库设计](https://github.com/lefex/iWeChat#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1)
+  - [💯沙盒目录](https://github.com/lefex/iWeChat#%E6%B2%99%E7%9B%92%E7%9B%AE%E5%BD%95)
+  - [💯Pod 集成](https://github.com/lefex/iWeChat#pod-%E9%9B%86%E6%88%90)
+  - [💯查看网络请求数据](https://github.com/lefex/iWeChat#%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE)
+
+- [🐰工具使用说明](https://github.com/lefex/iWeChat#%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)
+  - [💯CaptainHook Hook 代码]()
+  - [💯Logos 语法](https://github.com/lefex/iWeChat#logos-%E8%AF%AD%E6%B3%95)
+  - [💯查找可执行文件技巧](https://github.com/lefex/iWeChat#%E6%9F%A5%E6%89%BE%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%8A%80%E5%B7%A7)
+
+- [🐼业务逻辑](https://github.com/lefex/iWeChat#%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91)
+  - [💯还原某些UI的设计](https://github.com/lefex/iWeChat#%E8%BF%98%E5%8E%9F%E6%9F%90%E4%BA%9Bui%E7%9A%84%E8%AE%BE%E8%AE%A1)
+  - [💯探索各个模块业务逻辑](https://github.com/lefex/iWeChat#%E6%8E%A2%E7%B4%A2%E5%90%84%E4%B8%AA%E6%A8%A1%E5%9D%97%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91)
+  - [💯消息类型](https://github.com/lefex/iWeChat#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B)
+  - [💯文件说明](https://github.com/lefex/iWeChat#%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E)
+
+- [🦁错误总结](https://github.com/lefex/iWeChat#%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93)
+
+- [🙈相关推荐](https://github.com/lefex/iWeChat#%E5%A5%BD%E6%96%87%E6%8E%A8%E8%8D%90)
+
+- [🐯联系信息](https://github.com/lefex/iWeChat#%E8%81%94%E7%B3%BB%E4%BF%A1%E6%81%AF)
+
 ## 🐶初衷
 
 **我们一起还原微信，探索微信的奥妙之处**。微信作为 IM 领域的佼佼者，更是 APP 中的翘楚。它里面有很多值得开发者借鉴的地方，小到某个 View 的设计，大到整个APP的架构，一系列隐藏在背后的技术手段或交互设计需要我们挖掘。所以，希望通过 iWeChat 这个项目能够勾勒出微信的设计，使用到的技术手段等。最重要的是，从这个项目中，你可以学到如何分析一个第三方 APP。
@@ -218,7 +250,7 @@ end
 
 ## 🐰工具使用说明
 
-💯**CaptainHook Hook 代码**
+#### 💯CaptainHook Hook 代码
 
 ```objective-c
 // 无参数
@@ -452,6 +484,9 @@ Command /usr/bin/codesign failed with exit code 1
 
 已经有不少同学对微信有一些探索，把我们认为比较好的文章推荐到这里：
 
+- [**WeChatRedEnvelop 抢红包**  ](https://github.com/buginux/WeChatRedEnvelop)
+- [**WeChatPlugin-MacOS Mac微信插件**  ](https://github.com/TKkk-iOSer/WeChatPlugin-MacOS)
+
 
 
 ## 🐯联系信息
@@ -459,3 +494,7 @@ Command /usr/bin/codesign failed with exit code 1
 #### 如果想入群，可以先加我的微信好友，备注 iWechat ！！！
 
 <img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/qrcode.png" title="继承" width="300"/>
+
+## 免责声明
+
+本项目旨在学习微信的设计，不可用于商业和个人其他意图。若使用不当，请使用者自行承担。
