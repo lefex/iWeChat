@@ -650,7 +650,7 @@ NSString *filePath = [[NSBundle mainBundle] pathForResource:@"word" ofType:@"jso
 
 ` [LEFETopViewControllerMark  revealTopestViewControllerAndFrame]`
 
-<img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/uidebug.png" title="继承" width="300"/>
+<img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/uidebug2.png" title="继承" width="300"/>
 
 ## 🐼业务逻辑
 
