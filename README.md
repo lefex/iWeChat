@@ -634,6 +634,23 @@ UIViewController *detailVC = [@"LEFEBookDetailsViewController" invokeClassMethod
 
 [RuntimeInvoker](https://github.com/cyanzhong/RuntimeInvoker)
 
+#### 💯 资源文件需要添加到主文件夹中
+
+```objective-c
+NSString *filePath = [[NSBundle mainBundle] pathForResource:@"word" ofType:@"json"];
+// 如果添加到 xxxDylib 中，资源文件将找不到
+```
+
+
+
+#### 💯 UIDebug 工具
+
+把`lib/LEFETopViewControllerMark.{h,m}`文件导入到用 MonkeyDev 创建的项目中，要添加到 `xxxDylib`中。然后添加个事件，当事件触发时调用方法
+
+` [LEFETopViewControllerMark  revealTopestViewControllerAndFrame]`
+
+<img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/uidebug.png" title="继承" width="300"/>
+
 ## 🐼业务逻辑
 
 #### 💯还原某些UI的设计
