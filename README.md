@@ -44,6 +44,10 @@
 
 **我们一起还原微信，探索微信的奥妙之处**。微信作为 IM 领域的佼佼者，更是 APP 中的翘楚。它里面有很多值得开发者借鉴的地方，小到某个 View 的设计，大到整个APP的架构，一系列隐藏在背后的技术手段或交互设计需要我们挖掘。所以，希望通过 iWeChat 这个项目能够勾勒出微信的设计，使用到的技术手段等。最重要的是，从这个项目中，你可以学到如何分析一个第三方 APP。
 
+**如果想入群，可以先加我的微信好友，备注 iWechat ！！！**
+
+<img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/qrcode.png" title="继承" width="300"/>
+
 ## 🐱APP信息
 
 #### 💯砸壳 - ipa 获取
@@ -717,12 +721,6 @@ Command /usr/bin/codesign failed with exit code 1
 
 - [**深入iOS系统底层之汇编语言**](https://www.jianshu.com/p/365ed6c385e5)
 
-
-## 🐯联系信息
-
-#### 如果想入群，可以先加我的微信好友，备注 iWechat ！！！
-
-<img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/qrcode.png" title="继承" width="300"/>
 
 ## 免责声明
 
