@@ -24,6 +24,7 @@
   - [💯MachOView](https://github.com/lefex/iWeChat#machoview)
   - [💯在 Cycript 和 LLDB 中使用私有的方法调试 iOS](https://github.com/lefex/iWeChat#%E5%9C%A8-cycript-%E5%92%8C-lldb-%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%A7%81%E6%9C%89%E7%9A%84%E6%96%B9%E6%B3%95%E8%B0%83%E8%AF%95-ios)
   - [💯使用 NSInvocation 调用方法](https://github.com/lefex/iWeChat#%E4%BD%BF%E7%94%A8-nsinvocation-%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95)
+  - [💯 UIDebug 工具](https://github.com/lefex/iWeChat#-uidebug-%E5%B7%A5%E5%85%B7)
 
 - [🐼业务逻辑](https://github.com/lefex/iWeChat#%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91)
   - [💯还原某些UI的设计](https://github.com/lefex/iWeChat#%E8%BF%98%E5%8E%9F%E6%9F%90%E4%BA%9Bui%E7%9A%84%E8%AE%BE%E8%AE%A1)
@@ -645,7 +646,7 @@ NSString *filePath = [[NSBundle mainBundle] pathForResource:@"word" ofType:@"jso
 
 #### 💯 UIDebug 工具
 
-把`lib/LEFETopViewControllerMark.{h,m}`文件导入到用 MonkeyDev 创建的项目中，要添加到 `xxxDylib`中。然后添加个事件，当事件触发时调用方法
+把 [**lib/LEFETopViewControllerMark.{h,m}**](https://github.com/lefex/iWeChat/tree/master/lib) 文件导入到用 MonkeyDev 创建的项目中，要添加到 `xxxDylib`中。然后添加个事件，当事件触发时调用方法
 
 ` [LEFETopViewControllerMark  revealTopestViewControllerAndFrame]`
 
