@@ -14,7 +14,7 @@
   - [💯沙盒目录](https://github.com/lefex/iWeChat#%E6%B2%99%E7%9B%92%E7%9B%AE%E5%BD%95)
   - [💯Pod 集成](https://github.com/lefex/iWeChat#pod-%E9%9B%86%E6%88%90)
   - [💯查看网络请求数据](https://github.com/lefex/iWeChat#%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE)
-  - [💯查看动态库]()
+  - [💯查看动态库](https://github.com/lefex/iWeChat#%E6%9F%A5%E7%9C%8B%E5%8A%A8%E6%80%81%E5%BA%93)
 
 - [🐰工具使用说明](https://github.com/lefex/iWeChat#%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)
   - [💯CaptainHook Hook 代码]()
