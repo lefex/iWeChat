@@ -271,17 +271,17 @@ end
 **第三方**
 
 ```ruby
-	@rpath/TXLiteAVSDK_Smart_No_VOD.framework/TXLiteAVSDK_Smart_No_VOD
-	@rpath/Matrix.framework/Matrix
-	@rpath/YTFaceProSDK.framework/YTFaceProSDK 
-	@rpath/GPUImage.framework/GPUImage
-	@rpath/WCDB.framework/WCDB
-	@rpath/MMCommon.framework/MMCommon 
-	@rpath/MultiMedia.framework/MultiMedia 
-	@rpath/QBar.framework/QBar 
-	@rpath/QMapKit.framework/QMapKit
-	@rpath/ConfSDK.framework/ConfSDK
-	@rpath/mars.framework/mars 
+@rpath/TXLiteAVSDK_Smart_No_VOD.framework/TXLiteAVSDK_Smart_No_VOD
+@rpath/Matrix.framework/Matrix
+@rpath/YTFaceProSDK.framework/YTFaceProSDK 
+@rpath/GPUImage.framework/GPUImage
+@rpath/WCDB.framework/WCDB
+@rpath/MMCommon.framework/MMCommon 
+@rpath/MultiMedia.framework/MultiMedia 
+@rpath/QBar.framework/QBar 
+@rpath/QMapKit.framework/QMapKit
+@rpath/ConfSDK.framework/ConfSDK
+@rpath/mars.framework/mars 
 ```
 
 **系统 Framework**
