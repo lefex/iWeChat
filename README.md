@@ -14,6 +14,7 @@
   - [💯沙盒目录](https://github.com/lefex/iWeChat#%E6%B2%99%E7%9B%92%E7%9B%AE%E5%BD%95)
   - [💯Pod 集成](https://github.com/lefex/iWeChat#pod-%E9%9B%86%E6%88%90)
   - [💯查看网络请求数据](https://github.com/lefex/iWeChat#%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE)
+  - [💯查看动态库]()
 
 - [🐰工具使用说明](https://github.com/lefex/iWeChat#%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)
   - [💯CaptainHook Hook 代码]()
@@ -255,6 +256,110 @@ end
 
 - 找到某个应用中网络请求的统一出口，然后 Hook 掉这个方法，直接拿到数据。不过找到 APP 网络请求封装的类有时候比较难。教你一招，非常容易，找到某个页面中含有网络请求的类，使用 Hopper 工具查看伪代码，非常容易定位具体的网络请求类；
 - 使用网络工具直接集成到第三方APP中，通过工具查看网络请求，推荐[Flex](https://github.com/Flipboard/FLEX)，它可以查看网络请求；
+
+#### 💯查看动态库
+
+通过 `otool` 可以查看App使用的动态库，那么我们看看微信使用了哪些动态库，在终端执行命令 `otool -L WeChat ->~/Desktop/wechat.log`，在桌面打开 `wechat.log` 文件，即可看到微信使用的所有动态库。[参考知识小集](<https://m.weibo.cn/1645958062/4321387470442189>)。
+
+意外发现了 [Matrix.framework]( https://github.com/Tencent/matrix) 这个动态库，刚好前几天微信团队开源了 [Matrix]( https://github.com/Tencent/matrix)，看它的描述：
+
+> **Matrix** 是一款微信研发并日常使用的 APM（Application Performance Manage），当前主要运行在 Android 平台上。
+> Matrix 的目标是建立统一的应用性能接入框架，通过各种性能监控方案，对性能监控项的异常数据进行采集和分析，输出相应的问题分析、定位与优化建议，从而帮助开发者开发出更高质量的应用。
+
+说明iOS中也用了[Matrix]( https://github.com/Tencent/matrix)，仔细看了下它的文档发现，有个[SQLite Lint]( https://github.com/Tencent/matrix#sqlite-lint-1) 用来测试 SQL 语句的性能隐患，它底层是 C++ 实现，支持多平台扩展。--- (**纯属猜测**)
+
+**第三方**
+
+```ruby
+	@rpath/TXLiteAVSDK_Smart_No_VOD.framework/TXLiteAVSDK_Smart_No_VOD
+	@rpath/Matrix.framework/Matrix
+	@rpath/YTFaceProSDK.framework/YTFaceProSDK 
+	@rpath/GPUImage.framework/GPUImage
+	@rpath/WCDB.framework/WCDB
+	@rpath/MMCommon.framework/MMCommon 
+	@rpath/MultiMedia.framework/MultiMedia 
+	@rpath/QBar.framework/QBar 
+	@rpath/QMapKit.framework/QMapKit
+	@rpath/ConfSDK.framework/ConfSDK
+	@rpath/mars.framework/mars 
+```
+
+**系统 Framework**
+
+```ruby
+/System/Library/Frameworks/
+Contacts.framework/Contacts
+CallKit.framework/CallKit
+Accelerate.framework/Accelerate
+Intents.framework/Intents
+JavaScriptCore.framework/JavaScriptCore
+MultipeerConnectivity.framework/MultipeerConnectivity
+UserNotifications.framework/UserNotifications
+WatchKit.framework/WatchKit
+VideoToolbox.framework/VideoToolbox
+CoreSpotlight.framework/CoreSpotlight
+PushKit.framework/PushKit
+WebKit.framework/WebKit
+WatchConnectivity.framework/WatchConnectivity
+NetworkExtension.framework/NetworkExtension
+ContactsUI.framework/ContactsUI
+HealthKit.framework/HealthKit
+LocalAuthentication.framework/LocalAuthentication
+Photos.framework/Photos
+AdSupport.framework/AdSupport
+ExternalAccessory.framework/ExternalAccessory
+CoreBluetooth.framework/CoreBluetooth
+Security.framework/Security
+OpenAL.framework/OpenAL
+CoreText.framework/CoreText
+CoreTelephony.framework/CoreTelephony
+StoreKit.framework/StoreKit
+Accounts.framework/Accounts
+Social.framework/Social
+GLKit.framework/GLKit
+MediaPlayer.framework/MediaPlayer
+CoreMotion.framework/CoreMotion
+ImageIO.framework/ImageIO
+AssetsLibrary.framework/AssetsLibrary
+AVFoundation.framework/AVFoundation
+MessageUI.framework/MessageUI
+Foundation.framework/Foundation
+UIKit.framework/UIKit
+AddressBookUI.framework/AddressBookUI
+AddressBook.framework/AddressBook
+CoreLocation.framework/CoreLocation
+CoreVideo.framework/CoreVideo
+CFNetwork.framework/CFNetwork
+MobileCoreServices.framework/MobileCoreServices
+CoreGraphics.framework/CoreGraphics
+CoreMedia.framework/CoreMedia
+QuartzCore.framework/QuartzCore
+SystemConfiguration.framework/SystemConfiguration
+AudioToolbox.framework/AudioToolbox
+OpenGLES.framework/OpenGLES
+MapKit.framework/MapKit
+CoreFoundation.framework/CoreFoundation
+CoreImage.framework/CoreImage
+```
+
+**dylib**
+
+```ruby
+/usr/lib/libxml2.2.dylib
+/usr/lib/libc++.1.dylib
+/usr/lib/libsqlite3.dylib
+/usr/lib/libbz2.1.0.dylib
+/usr/lib/libresolv.9.dylib
+/usr/lib/libiconv.2.dylib
+/usr/lib/libz.1.dylib
+/usr/lib/libicucore.A.dylib
+/usr/lib/libobjc.A.dylib
+/usr/lib/libSystem.B.dylib
+```
+
+
+
+
 
 ## 🐰工具使用说明
 
