@@ -828,3 +828,9 @@ Command /usr/bin/codesign failed with exit code 1
 **如果想入群，可以先加我的微信好友，备注 iWechat ！！！**
 
 <img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/qrcode.png" title="继承" width="300"/>
+
+
+
+**我的公众号：超越技术**
+
+<img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/qrcode_main.jpg" title="继承" width="300"/>
