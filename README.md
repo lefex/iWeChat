@@ -78,10 +78,17 @@
 
 需要安装 [Cydia Impactor](http://www.cydiaimpactor.com/) 这里用来安装软件，下载完成后，需要把你所需要的安装包拖到 Cydia Impactor，安装过程中如果没有出现错误，说明安装成功。
 
+```js
+// 应用会报错到这个目录下
+/var/mobile/Containers/Data/Application/
+```
+
+
+
 登录
 
 ```
-安装 OpenSSL
+安装 OpenSSL(在Cydia中安装)
 sudo ssh root@172.24.94.140
 <!--修改密码默认为 alpine 为 (q--4)-->
 TCZYde-iPhone:~ root# passwd
@@ -244,9 +251,15 @@ CREATE TABLE RevokeMsgTable (
 
 #### 💯沙盒目录
 
-沙盒目录结构是什么，每个文件夹下面保存了那些数据。
+沙盒目录结构是什么，每个文件夹下面保存了那些数据。非越狱手机，通过Xcode直接导出（windows->devices and simulators - 设置按钮 - Download Container ...），这个时间比较长，需要耐心等待。
 
 ![](https://github.com/lefex/iWeChat/blob/master/image/wc_sandbox.png?raw=true)
+
+**使用iFunBox工具**
+
+这个工具比较强大，可以直接把越狱设备的内容拷贝到电脑上，一图胜千言，直接看图吧。
+
+![](https://github.com/lefex/iWeChat/blob/master/image/ifunbox.png?raw=true)
 
 
 
