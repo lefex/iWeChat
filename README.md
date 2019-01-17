@@ -6,6 +6,7 @@
 
 - [🐱APP信息](https://github.com/lefex/iWeChat#app%E4%BF%A1%E6%81%AF)
   - [💯砸壳 - ipa 获取](https://github.com/lefex/iWeChat#app%E4%BF%A1%E6%81%AF)
+  - [💯手机越狱]()
   - [💯头文件](https://github.com/lefex/iWeChat#%E5%A4%B4%E6%96%87%E4%BB%B6)
   - [💯第三方库](https://github.com/lefex/iWeChat#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93)
   - [💯UI](https://github.com/lefex/iWeChat#ui)
@@ -70,6 +71,21 @@
 在 Mac 中的 iTunes 中下载应用，通过 Charles 抓包获取到 ipa 包的下载地址，直接在浏览器中下载，下载地址是在 p52-buy.itunes 这个域名下。
 
 获取到 ipa 包后就需要砸壳。如果从越狱助手上下载的则不需要砸壳。
+
+#### 💯手机越狱
+
+我使用的是[叉叉越狱助手](https://jb.xxzhushou.cn/)，按照他的流程，即可完成越狱。安装完成会出现 Cydia 这个应用，你可以理解成它是越狱应用商店。有时候比较坑，越狱时可能会出现黑屏。
+
+需要安装 [Cydia Impactor](http://www.cydiaimpactor.com/) 这里用来安装软件，下载完成后，需要把你所需要的安装包拖到 Cydia Impactor，安装过程中如果没有出现错误，说明安装成功。
+
+登录
+
+```
+安装 OpenSSL
+sudo ssh root@172.24.94.140
+<!--修改密码默认为 alpine 为 (q--4)-->
+TCZYde-iPhone:~ root# passwd
+```
 
 #### 💯头文件
 
