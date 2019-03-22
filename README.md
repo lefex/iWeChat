@@ -568,6 +568,64 @@ http://iphonedevwiki.net/index.php/Logos
 // 要有结束标签
 %end
 ```
+#### 💯调用带有参数为block的方法
+
+```objective-c
+@interface NetworkTask : NSObject
+
+- (void)requestComplete:(void(^)(NSString *name))completion;
+- (void)requestID:(NSString *)docId domplete:(void(^)(NSString *name))completion failed:(void(^)(NSError *error))failed;
+
+@end
+
+// 方法一：只支持一个参数
+- (void)runTaskForPerform {
+    NSObject *task = [objc_getClass("NetworkTask") new];
+    void(^completeBlock)(NSString *) = ^(NSString *name) {
+        NSLog(@"block: %@", name);
+    };
+    [task performSelector:@selector(requestComplete:) withObject:completeBlock];
+}
+
+// 方法二：支持多个参数
+- (void)runTask {
+    NSObject *task = [objc_getClass("NetworkTask") new];
+    SEL selector = NSSelectorFromString(@"requestID:domplete:failed:");
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[objc_getClass("NetworkTask") instanceMethodSignatureForSelector:selector]];
+    [invocation setSelector:selector];
+    [invocation setTarget:task];
+    NSString *docId = @"123";
+    [invocation setArgument:&docId atIndex:2];
+
+    void(^completeBlock)(NSString *) = ^(NSString *name) {
+        NSLog(@"block invocation: %@", name);
+    };
+    [invocation setArgument:&completeBlock atIndex:3];
+
+    void(^fliedBlock)(NSError *) = ^(NSError *error) {
+        NSLog(@"block invocation error: %@", error);
+    };
+    [invocation setArgument:&fliedBlock atIndex:4];
+    [invocation invoke];
+}
+
+// 方法三：支持多个参数
+- (void)runTaskForMsgSend {
+    NSString *docId = @"123";
+    
+    void(^completeBlock)(NSString *) = ^(NSString *name) {
+        NSLog(@"block objc_msgSend: %@", name);
+    };
+    
+    void(^filedBlock)(NSError *) = ^(NSError *error) {
+        NSLog(@"block objc_msgSend error: %@", error);
+    };
+    NSObject *task = [objc_getClass("NetworkTask") new];
+    SEL selector = NSSelectorFromString(@"requestID:domplete:failed:");
+
+    ((void (*)(id, SEL, id, id, id, id))objc_msgSend)(task, selector, docId, completeBlock, filedBlock, NULL);
+}
+```
 
 #### 💯查找可执行文件技巧
 
