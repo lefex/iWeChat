@@ -18,7 +18,7 @@
   - [💯查看动态库](https://github.com/lefex/iWeChat#%E6%9F%A5%E7%9C%8B%E5%8A%A8%E6%80%81%E5%BA%93)
 
 - [🐰工具使用说明](https://github.com/lefex/iWeChat#%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)
-  - [💯CaptainHook Hook 代码]()
+  - [💯CaptainHook Hook 代码](https://github.com/lefex/iWeChat#captainhook-hook-%E4%BB%A3%E7%A0%81)
   - [💯Logos 语法](https://github.com/lefex/iWeChat#logos-%E8%AF%AD%E6%B3%95)
   - [💯查找可执行文件技巧](https://github.com/lefex/iWeChat#%E6%9F%A5%E6%89%BE%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%8A%80%E5%B7%A7)
   - [💯class-dump 使用](https://github.com/lefex/iWeChat#class-dump-%E4%BD%BF%E7%94%A8)
