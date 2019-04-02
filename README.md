@@ -423,7 +423,7 @@ CHConstructor{
 
 ```objective-c
 @interface Lefex : NSObject
-
+@property (nonatomic, copy) NSString *city;
 + (Lefex *)empty;
 - (void)updateNickName:(NSString *)nickName;
 - (void)updateNickName:(NSString *)nickName age:(int)age;
@@ -433,6 +433,8 @@ CHConstructor{
 ```
 
 ```objective-c
+@synthesize city = _city;
+
 @implementation Lefex
 
 + (Lefex *)empty {
@@ -453,6 +455,14 @@ CHConstructor{
     if (block) {
         block(@"lefe_x");
     }
+}
+
+- (void)setCity:(NSString *)city {
+    _city = city;
+}
+
+- (NSString *)city {
+    return _city;
 }
 
 @end
@@ -477,6 +487,19 @@ CHOptimizedClassMethod0(self, Lefex *, Lefex, empty){
 CHOptimizedMethod1(self, void, Lefex, updateNickName, NSString *, name) {
     CHSuper1(Lefex, updateNickName, name);
     NSLog(@"hook updateNickName");
+}
+
+// Hook属性，hook对应的get和set方法
+// hook set 方法
+CHOptimizedMethod1(self, void, Lefex, setCity, NSString *, city) {
+    CHSuper1(Lefex, setCity, @"BeiJing");
+    NSLog(@"hook setCity");
+}
+
+// hook get 方法
+CHOptimizedMethod0(self, void, Lefex, city) {
+    NSLog(@"hook city");
+    return CHSuper0(Lefex, city);
 }
 
 // Hook 两个参数的方法
@@ -510,7 +533,9 @@ CHConstructor {
     CHLoadClass(Lefex);
     // un linkable
 //    CHLoadLateClass(Lefex);
-    
+
+    CHClassHook1(Lefex, setCity);
+    CHClassHook0(Lefex, city);
     CHClassHook0(Lefex, empty);
     CHClassHook1(Lefex, updateNickName);
     CHClassHook2(Lefex, updateNickName, age);
@@ -533,6 +558,9 @@ CHConstructor {
 2018-12-12 21:03:13.379513+0800 CaptainDemo[43777:862109] orgin - queryLocation:
 2018-12-12 21:03:13.379582+0800 CaptainDemo[43777:862109] hook queryLocation: BeiJing
 2018-12-12 21:03:13.379670+0800 CaptainDemo[43777:862109] orgin loction: BeiJing
+2019-04-02 10:20:10.415550+0800 CaptainDemo[3253:27954] orgin loction: BeiJing
+2019-04-02 10:20:10.415732+0800 CaptainDemo[3253:27954] hook setCity
+2019-04-02 10:20:10.415941+0800 CaptainDemo[3253:27954] hook city
 ```
 
 #### 💯Logos 语法
