@@ -862,7 +862,24 @@ NSString *filePath = [[NSBundle mainBundle] pathForResource:@"word" ofType:@"jso
 // 如果添加到 xxxDylib 中，资源文件将找不到
 ```
 
+#### 💯 命令行
 
+```objective-c
+1.查看可执行文件 Macch-O的架构
+➜  ~ file ~/Desktop/Mach-ODemo
+/Users/wangsuyan/Desktop/Mach-ODemo: Mach-O universal binary with 2 architectures: [arm_v7:Mach-O executable arm_v7] [arm64:Mach-O 64-bit executable arm64]
+/Users/wangsuyan/Desktop/Mach-ODemo (for architecture armv7):	Mach-O executable arm_v7
+/Users/wangsuyan/Desktop/Mach-ODemo (for architecture arm64):	Mach-O 64-bit executable arm64
+
+2.通过 --arch 指定所使用CPU的架构
+class-dump -a ~/Desktop/Mach-ODemo --arch armv7
+
+3.查看Mach-O中某个类中的头文件
+class-dump -C ViewController ~/Desktop/Mach-ODemo
+
+4.查找Mach-O中某个方法
+class-dump -f name lefex ~/Desktop/Mach-ODemo
+```
 
 #### 💯 UIDebug 工具
 
