@@ -26,6 +26,7 @@
   - [💯MachOView](https://github.com/lefex/iWeChat#machoview)
   - [💯在 Cycript 和 LLDB 中使用私有的方法调试 iOS](https://github.com/lefex/iWeChat#%E5%9C%A8-cycript-%E5%92%8C-lldb-%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%A7%81%E6%9C%89%E7%9A%84%E6%96%B9%E6%B3%95%E8%B0%83%E8%AF%95-ios)
   - [💯使用 NSInvocation 调用方法](https://github.com/lefex/iWeChat#%E4%BD%BF%E7%94%A8-nsinvocation-%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95)
+  - [💯 查看App中的字符串]()
   - [💯 UIDebug 工具](https://github.com/lefex/iWeChat#-uidebug-%E5%B7%A5%E5%85%B7)
 
 - [🐼业务逻辑](https://github.com/lefex/iWeChat#%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91)
@@ -880,6 +881,47 @@ class-dump -C ViewController ~/Desktop/Mach-ODemo
 4.查找Mach-O中某个方法
 class-dump -f name lefex ~/Desktop/Mach-ODemo
 ```
+
+#### 💯 查看App中的字符串
+
+有时候我们想查看App中的一些字符串的值，比如下面的代码：
+
+```objective-c
+static NSString *kName = @"name lefex";
+static const NSString *kNameConst = @"name lefex const";
+
+NSString *name = [NSString stringWithFormat:@"%@ - %@", kName, kNameConst];
+NSLog(@"name --- %@", name);
+
+- (void)lefex {
+    NSLog(@"Hello lefex");
+}
+
+__attribute__((constructor(101)))
+void before101() {
+    NSLog(@"before101");
+}
+```
+
+使用命令`xcrun otool -v -s __TEXT __cstring ~/Desktop/Mach-ODemo`，可以看到控制台输出了上面代码中定义的字符串。这条命令的作用是查看可执行文件`__TEXT`段内名为`__cstring`的内容，`~/Desktop/Mach-ODemo`是可执行文件的路径，获取可执行文件的方式非常多，可以查看以往的小集。如果你只是想看看效果，可以从自己项目的ipa文件中找到可执行文件。:
+
+```objective-c
+/Users/lefex/Desktop/Mach-ODemo (architecture armv7):
+Contents of (__TEXT,__cstring) section
+0000b67d  Hello lefex
+0000b689  before101
+0000b693  before103
+0000b69d  before102
+0000b6a7  Hello destory
+0000b6b5  %@
+0000b6b8  Hello load
+0000b6c3  name lefex
+0000b6ce  name lefex const
+```
+
+这是目前我觉得最简单的一种方式。如果代码中有比较铭感的内容，切记要经过特殊处理。可执行文件中还有好多有趣的内容。感兴趣的可以深入了解可执行文件究竟都保存了哪些信息。
+
+查看微信的可执行文件字符串内容：`➜  ~ xcrun otool -v -s __TEXT __cstring ~/Desktop/WeChat ->~/Desktop/wechts.log`
 
 #### 💯 UIDebug 工具
 
