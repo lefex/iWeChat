@@ -999,6 +999,6 @@ Command /usr/bin/codesign failed with exit code 1
 
 
 
-**我的公众号：超越技术**
+**我的公众号：素燕，前端、iOS、与图解算法**
 
 ![](https://github.com/lefex/iWeChat/blob/master/image/fe.png?raw=true)
