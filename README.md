@@ -1001,4 +1001,4 @@ Command /usr/bin/codesign failed with exit code 1
 
 **我的公众号：超越技术**
 
-<img src="https://raw.githubusercontent.com/lefex/iWeChat/master/image/qrcode_main.jpg" title="继承" width="300"/>
+![](https://github.com/lefex/iWeChat/blob/master/image/fe.png?raw=true)
