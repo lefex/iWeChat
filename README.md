@@ -45,7 +45,9 @@
 
 ## 🐶初衷
 
-通过这个项目学会如何分析一个第三方 APP。
+通过这个项目学会如何分析一个第三方 APP。关于我的更多信息，扫码关注 素燕：
+
+![](https://upload-images.jianshu.io/upload_images/1664496-1471f633bfc7d877.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## 🐱APP信息
 
@@ -996,9 +998,3 @@ Command /usr/bin/codesign failed with exit code 1
 ## 免责声明
 
 本项目旨在学习微信的设计，不可用于商业和个人其他意图。若使用不当，请使用者自行承担。逆向微信时可能会有被封号的危险，遇到微信的提醒后建议立即停止使用。
-
-
-
-**我的公众号：素燕，前端、iOS、与图解算法**
-
-![](https://github.com/lefex/iWeChat/blob/master/image/fe.png?raw=true)
